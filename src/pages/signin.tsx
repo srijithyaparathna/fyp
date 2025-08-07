@@ -5,7 +5,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/Input";
-import PageLoader from "@/components/PageLoader";
+import PageLoader from "@/components/PageLoader"; 
 
 function Signin() { 
   const [email, setEmail] = useState("");
