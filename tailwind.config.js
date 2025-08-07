@@ -17,6 +17,11 @@ module.exports = {
       },
     },
     extend: {
+       fontFamily: {
+        productsans: ['productsans', 'sens-sarif'],
+        productsansregular: ['productsansregular', 'sens-sarif'],
+     
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
