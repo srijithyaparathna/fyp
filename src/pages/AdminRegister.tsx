@@ -189,7 +189,7 @@ function Signup() {
                     type="submit"
                     disabled={!email || !password || !confirmPassword}
                   >
-                    SIGN UP
+                    REGISTER
                   </button>
                 </div>
               </form>
