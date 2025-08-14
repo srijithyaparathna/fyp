@@ -31,7 +31,7 @@ const InfantDetails = () => {
           position: 'fixed',
           top: 0,
           left: 0,
-          width: 350,
+          width: 300,
           height: '100vh',
           zIndex: 1100,
           bgcolor: 'background.paper', // optional background
@@ -42,7 +42,7 @@ const InfantDetails = () => {
 
       <Box
         sx={{
-          marginLeft: '350px',    // offset to right of sidebar
+          marginLeft: '300px',    // offset to right of sidebar
           marginTop: '64px',      // offset below navbar
           height: 'calc(100vh - 64px)', // full viewport height minus navbar height
           overflowY: 'auto',
@@ -56,7 +56,7 @@ const InfantDetails = () => {
           sx={{
             position: 'fixed',
             top: 0,
-            left: 350,
+            left: 300,
             right: 0,
             height: 64,
             zIndex: 1200,

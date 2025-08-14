@@ -44,7 +44,7 @@ const InfantDetailCard = ({ infant, onBack, subView, setSubView }: Props) => {
   return (
     <Box>
     <Box
-     p={4} bgcolor="white" borderRadius={15} boxShadow={2} 
+     p={4} bgcolor="white" borderRadius={15} boxShadow={2} width={1500} 
     >
       <Button variant="outlined" onClick={onBack} sx={{ mb: 3 }}>
         ← Back to List
@@ -78,7 +78,7 @@ const InfantDetailCard = ({ infant, onBack, subView, setSubView }: Props) => {
 
 
   {/* Vertical Divider */}
-  <Divider orientation="vertical" flexItem  sx={{ml:10}} />
+  <Divider orientation="vertical" flexItem  sx={{ml:5}} />
 
 
 
@@ -87,7 +87,7 @@ const InfantDetailCard = ({ infant, onBack, subView, setSubView }: Props) => {
 
       <Grid sx={{ml:10}} >
 
-        <Grid container spacing={20} >
+        <Grid container spacing={10} >
           <Grid item xs={6} >
             <Box display="flex" flexDirection="column">
               <Typography>Sex:</Typography>

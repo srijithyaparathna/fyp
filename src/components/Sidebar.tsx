@@ -30,7 +30,7 @@ export const Sidebar = ({ active = "Dashboard", setActivePage, doctor }) => {
   return (
     <Box
       sx={{
-        width: 350,
+        width: 300,
         bgcolor: "white",
         height: "100vh",
         boxShadow: 2,
@@ -48,7 +48,7 @@ export const Sidebar = ({ active = "Dashboard", setActivePage, doctor }) => {
           bgcolor: "#6C63FF",
           color: "white",
           textAlign: "center",
-          py: 3,
+          py: 2,
           mb: 3,
           
         }}

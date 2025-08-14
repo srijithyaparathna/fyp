@@ -73,7 +73,7 @@ const ChartCard = ({ title, apiUrl = defaultApiUrl, type = 'temperature' }) => {
   return (
     <div
       style={{
-        width: '800px',
+        width: '700px',
         background: '#fff',
         padding: '20px',
         borderRadius: '10px',
