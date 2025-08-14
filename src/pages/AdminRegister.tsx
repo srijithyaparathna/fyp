@@ -69,7 +69,7 @@ function Signup() {
     }
     const data = { email, password };
     console.log(data);
-    navigate("/home");
+    navigate("/infantdetails");
   };
   const handleRoleChange = (value: string) => {
     setRole(value); 
@@ -175,7 +175,7 @@ function Signup() {
                         options={["Admin", "User", "Manager"]} 
                       />
                     </div>
-                  </div>
+                  </div> 
 
                   {/* <h1 className="xl:mt-[2px] text-end w-full cursor-pointer hover:opacity-75 hover:text-[#6673FC] text-10 lg:text-12"
                 onClick={() => navigate("/Forgetpw")}>

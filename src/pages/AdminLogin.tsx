@@ -1,7 +1,4 @@
-// import login from "public/images/login/login.jpg";
-// import apple from "public/images/login/apple.png";
-// import google from "public/images/login/google.png";
-// import Facebook from "public/images/login/Facebook.png";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/Input";
@@ -9,7 +6,7 @@ import PageLoader from "@/components/PageLoader";
 
 function Signin() {
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");  
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
@@ -22,20 +19,8 @@ function Signin() {
     return () => window.removeEventListener("load", handleLoad);
   }, []);
 
-  //   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-
-  //      if (username === "") {
-  //     setUsernameError("Username is required.");
-  //     return;
-  //   } else {
-  //     setUsernameError("");
-  //   }
-
-  //     const data = { username, password };
-  //     console.log(data);
-  //   };
   const [loginError, setLoginError] = useState("");
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -59,7 +44,7 @@ function Signin() {
       setLoginError("Invalid username or password.");
       return;
     }
-    navigate("/home");
+    navigate("/infantdetails");
   };
 
   const handleAppleSignin = () => {
