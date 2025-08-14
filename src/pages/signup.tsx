@@ -42,7 +42,7 @@ function Signup() {
         setPWError(""); // Clear error when passwords match
       }
      
-    const data = { email, password };
+    const data = { email, password }; 
     console.log(data);
     navigate("/infantdetails");
   };
