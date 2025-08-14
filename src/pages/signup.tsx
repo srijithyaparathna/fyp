@@ -44,6 +44,7 @@ function Signup() {
      
     const data = { email, password }; 
     console.log(data);
+    navigate("/infantdetails");
   };
   
   const handleAppleSignin = () => {

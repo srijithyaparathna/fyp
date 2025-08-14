@@ -4,7 +4,7 @@
 // import Facebook from "public/images/login/Facebook.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Input } from "@/components/Input";
+import { Input } from "@/components/Input"; 
 import PageLoader from "@/components/PageLoader"; 
 
 function Signin() { 
@@ -36,6 +36,7 @@ function Signin() {
   
     const data = { email, password };
     console.log(data);
+    navigate("/infantdetails");
   };
   
   const handleAppleSignin = () => {

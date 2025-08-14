@@ -120,7 +120,12 @@ useEffect(()=>{
         elevation={0}
         sx={{ backgroundColor: '#f1f4f9', p: 2, borderRadius: 4 }}
       >
-        <Table>
+        <Table
+          sx={{
+    borderCollapse: 'separate',
+    borderSpacing: '0 12px', // horizontal 0, vertical 12px gap
+  }}
+        >
           <TableHead>
             <TableRow>
               <TableCell><b>Baby</b></TableCell>
@@ -230,6 +235,7 @@ useEffect(()=>{
                   <TableCell>{infant.doctor}</TableCell>
                   <TableCell>{infant.lastUpdate}</TableCell>
                 </TableRow>
+                
               ))
             ) : (
               <TableRow>
@@ -237,8 +243,10 @@ useEffect(()=>{
                   No infant data available.
                 </TableCell>
               </TableRow>
+              
             )}
           </TableBody>
+   
         </Table>
       </TableContainer>
 )}
