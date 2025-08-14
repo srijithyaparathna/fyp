@@ -5,8 +5,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MailIcon from '@mui/icons-material/Mail'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
-
-
+import MessageModal from './MessageModal';
+import NotificationModal from './NotificationModal';
+import MoreOptionsMenu from "./MoreOptionsMenu"; 
+import SidebarMenu from './SidebarMenu';
 const Search = styled('div')(({theme})=>({
   position:'relative',
   borderRadius:theme.shape.borderRadius,
@@ -37,11 +39,11 @@ export const Navbar = () => {
 
 
   // State Management 
-  const [notifications,setNotificationns] = useState(0);
+  const [notifications,setNotifications] = useState(0);
   const [messages,setMessages] = useState(0);
   const [searchQuery,setSearchQuery] = useState(0);
-
-
+  const [openNotifications,setOpenNotifications]= useState(false);
+  const [openMessages, setOpenMessages]=useState(false);
 
  // API call 
  useEffect(() => {
@@ -67,12 +69,12 @@ fetchNotification();
   };
 
   const handleNotificationsClick = () => {
-    console.log("View notification");
+    setOpenNotifications(true);
 
   };
 
   const handelMessagesClick = ()=>{
-    console.log("View messages");
+    setOpenMessages(true); 
   }
 
   const handleMoreOptionClick = () => {
@@ -82,17 +84,19 @@ fetchNotification();
 
 
   return (
+    
+<>
 <AppBar 
   position="static"
   elevation={1} 
-  sx={{ py: 1, }}
+  sx={{ py: 0, }}
   color='inherit'
+  
 >
   <Toolbar sx={{justifyContent:'space-between'}} >
     <Box sx={{display:'flex',alignContent:'center'}} >
-      <IconButton edge="start" color='inherit' >
-       <MenuIcon/>
-      </IconButton>
+<SidebarMenu />
+
      <Search>
       
       <SearchInput placeholder='Search...' />
@@ -104,14 +108,14 @@ fetchNotification();
     {/* Right: Icons + Profile */}
     <Box sx={{display:'flex',alignItems:'center',gap:2,ml:'auto' }} >
 
-    <IconButton color='inherit' >
+    <IconButton color='inherit' onClick={handleNotificationsClick} >
       <Badge badgeContent={6} color='error' > 
         <NotificationsIcon/>
       </Badge>
     </IconButton>
 
     <IconButton color='inherit' >
-      <Badge badgeContent={2} color='primary' >
+      <Badge badgeContent={2} color='primary' onClick={handelMessagesClick} >
         <MailIcon/>
       </Badge>
     </IconButton>
@@ -128,17 +132,19 @@ fetchNotification();
 
     </Box>
 
-    <IconButton color='inherit' >
-
-    <MoreVertIcon/>
-
-    </IconButton>
-
+        {/* More Options Menu */}
+            <MoreOptionsMenu        
+            />
 
     </Toolbar>
 
 
 
     </AppBar>
-  )
-}
+
+    {/* Modals */}
+      <NotificationModal open={openNotifications} onClose={() => setOpenNotifications(false)} />
+      <MessageModal open={openMessages} onClose={() => setOpenMessages(false)} />
+</>
+  );
+};

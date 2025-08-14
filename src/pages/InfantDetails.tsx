@@ -1,4 +1,3 @@
-// pages/InfantDetails.jsx (your override)
 import React, { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Sidebar } from '@/components/Sidebar';
@@ -14,24 +13,59 @@ const InfantDetails = () => {
   const renderContent = () => {
     switch (activePage) {
       case 'Dashboard':
-        return <DashboardContent/>
+        return <DashboardContent />
       case 'Infant':
-        return <InfantDetailsContent/>
+        return <InfantDetailsContent />
       case 'Settings':
-        return < SettingsPageContent/>
-      default: 
-        return 
+        return <SettingsPageContent />
+      default:
+        return null;
     }
   };
 
   return (
-    <Box sx={{ display: 'flex', margin: 0, padding: 0  }}>
-      <Sidebar active={activePage} setActivePage={setActivePage} />
-      <Box sx={{ flexGrow: 1, margin: 0, padding: 0 ,  backgroundColor: "#e8eef1" }}>
-        <Navbar />
-        <Box sx={{ p: 3  }}>
-          {renderContent()}
+    <Box sx={{ display: 'flex', margin: 0, padding: 0 }}>
+      {/* Fixed Sidebar */}
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: 300,
+          height: '100vh',
+          zIndex: 1100,
+          bgcolor: 'background.paper', // optional background
+        }}
+      >
+        <Sidebar active={activePage} setActivePage={setActivePage} />
+      </Box>
+
+      <Box
+        sx={{
+          marginLeft: '300px',    // offset to right of sidebar
+          marginTop: '64px',      // offset below navbar
+          height: 'calc(100vh - 64px)', // full viewport height minus navbar height
+          overflowY: 'auto',
+          backgroundColor: '#e8eef1',
+          flexGrow: 1,
+          padding: 3,
+        }}
+      >
+        {/* Fixed Navbar */}
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 300,
+            right: 0,
+            height: 64,
+            zIndex: 1200,
+          }}
+        >
+          <Navbar />
         </Box>
+
+        {renderContent()}
       </Box>
     </Box>
   );
