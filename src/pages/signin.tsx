@@ -1,17 +1,15 @@
-// import login from "public/images/login/login.jpg";
-// import apple from "public/images/login/apple.png";
-// import google from "public/images/login/google.png";
-// import Facebook from "public/images/login/Facebook.png";
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/Input"; 
 import PageLoader from "@/components/PageLoader"; 
 
 function Signin() { 
-  const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  const [emailpwError, setEmailPwError] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -25,23 +23,29 @@ function Signin() {
   const handleSignin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   
-    // Email format validation (allows any domain)
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Wrong Email Format.");
+    // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // if (!emailRegex.test(email)) {
+    //   setEmailError("Wrong Email Format.");
+    //   return;
+    // } else {
+    //   setEmailError(""); 
+    // }
+
+    if (!username || !password) {
+      setEmailPwError("Wrong Email Format.");
       return;
     } else {
-      setEmailError(""); // Clear error if format is correct
+      setEmailPwError(""); 
     }
   
-    const data = { email, password };
+    const data = { username, password };
     console.log(data);
     navigate("/infantdetails");
   };
   
   const handleAppleSignin = () => {
     window.location.href = "https://appleid.apple.com/auth/authorize";
-    // Replace with actual Apple Sign-In URL for your application.
+
   };
   return (
     <div className="flex flex-col md:flex w-full relative mobile-background  ">
@@ -62,24 +66,24 @@ function Signin() {
           </div>
           {/* content */}
           <div className="space-y-[53px] lg:space-y-[60px] 2xl:w-[540px]">
-            {/* email, pw */}
+            {/* username, pw */}
             <form onSubmit={handleSignin}>
               <div className="space-y-[12px] xl:space-y-[16px]">
                 <div className="space-y-[18px] xl:space-y-[20px] flex flex-col">
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
                     <span className="text-12 md:text-[14px] ">
-                      Email
+                      User Name
                     </span>
                     <Input
-                      type="email"
-                      placeholder="Enter Your Email"
+                      type="username"
+                      placeholder="Enter Your User Name"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setEmail(e.target.value)
+                        setUserName(e.target.value)
                       }
                     />
-                    {emailError && (
+                    {/* {emailError && (
                       <span className="text-red-500 text-sm">{emailError}</span>
-                    )}
+                    )} */}
                   </div>
 
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
@@ -96,16 +100,19 @@ function Signin() {
                     />
                   </div>
                 </div>
+                {emailpwError && (
+                      <span className="text-red-500 text-sm">{emailpwError}</span>
+                    )} 
                 <h1 className="xl:mt-[2px] text-end w-full cursor-pointer hover:opacity-75 hover:text-[#6673FC] text-[10px] lg:text-[12px]"
                 onClick={() => navigate("/Forgetpw")}>
                   Forget Password ?
                 </h1>
                 <button
                   className={`bg-[#6673FC] h-[32.17px] lg:h-[50px] font-productsans text-white w-full py-[8px] 2xl:py-[10px] text-[12px] md:text-[16px] ${
-                    !email || !password ? "cursor-not-allowed" : ""
+                    !username || !password ? "cursor-not-allowed" : ""
                   }`}
                   type="submit"
-                  disabled={!email || !password}
+                  disabled={!username || !password}
                 >
                   SIGN IN
                 </button>
