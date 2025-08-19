@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "@/pages/Home";
 // In App.jsx
 import InfantDetails from "./pages/InfantDetails"; // ✅ No curly braces
+import AddBaby from "@/components/AddBaby"; 
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -25,6 +26,7 @@ function App() {
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/infantdetails" element={<InfantDetails/>}/>
+            <Route path="/addbaby" element={<AddBaby />} />
           </Routes> 
         </div>
       </div>{" "}
