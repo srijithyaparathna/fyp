@@ -37,7 +37,8 @@ const InfantDetails = () => {
           bgcolor: 'background.paper', // optional background
         }}
       >
-        <Sidebar active={activePage} setActivePage={setActivePage} />
+       
+        <Sidebar active={activePage} setActivePage={setActivePage}  />
       </Box>
 
       <Box

@@ -172,7 +172,7 @@ function Signup() {
                       <Select
                         value={role}
                         onChange={handleRoleChange} 
-                        options={["Admin", "User", "Manager"]} 
+                        options={["Doctor","Nurse","Patient",]} 
                       />
                     </div>
                   </div> 
