@@ -59,6 +59,7 @@ const InfantDetailCard = ({ infant, onBack, subView, setSubView }: Props) => {
     <Button
   variant="outlined"
   size="small"
+   onClick={() => setSubView("LiveFeed")} // same as clicking a tab
   sx={{
     mt: 4,
     borderRadius: '15px', // You can adjust the px value

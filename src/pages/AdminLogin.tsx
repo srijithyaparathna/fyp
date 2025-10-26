@@ -21,31 +21,57 @@ function Signin() {
 
   const [loginError, setLoginError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    setUsernameError("");
-    setPasswordError("");
-    setLoginError("");
+  setUsernameError("");
+  setPasswordError("");
+  setLoginError("");
 
-    if (username === "") {
-      setUsernameError("Username is required.");
+  if (username === "") {
+    setUsernameError("Username is required.");
+    return;
+  }
+
+  if (password === "") {
+    setPasswordError("Password is required.");
+    return;
+  }
+
+  try {
+    // Make the API request to your backend
+    const response = await fetch("http://localhost:5000/api/auth/login", { // adjust backend URL
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      // If backend sends an error
+      setLoginError(data.message || "Login failed");
       return;
     }
 
-    if (password === "") {
-      setPasswordError("Password is required.");
-      return;
-    }
-      const validUsername = "user";  // Replace with actual username logic
-      const validPassword = "password123"; 
+    // ✅ Store token and user in localStorage
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
 
-    if (username !== validUsername || password !== validPassword) {
-      setLoginError("Invalid username or password.");
-      return;
-    }
+    // Optionally store just username/role
+    // localStorage.setItem("username", data.user.username);
+    // localStorage.setItem("role", data.user.role);
+
+    // Redirect to the dashboard or infant details page
     navigate("/infantdetails");
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    setLoginError("Something went wrong. Please try again.");
+  }
+};
+
 
   const handleAppleSignin = () => {
     window.location.href = "https://appleid.apple.com/auth/authorize";
@@ -65,7 +91,7 @@ function Signin() {
             <div className="flex flex-col font-productsans text-[20px] md:text-[32px] lg:hidden mb-[40px]">
               Welcome to the <br />
               <span className="text-[36px] md:text-[60px] -mt-3 md:-mt-4 mb-5">
-                NICU
+                NICUn
               </span>
             </div>
             {/* content */}
