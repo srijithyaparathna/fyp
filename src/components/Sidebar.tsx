@@ -21,7 +21,16 @@ const menuItems = [
 ];
 
 // Sidebar component
-export const Sidebar = ({ active = "Dashboard", setActivePage, doctor }) => {
+type SidebarProps = {
+  active?: string;
+  setActivePage: (page: string) => void;
+  doctor?: {
+    name?: string;
+    avatar?: string;
+  };
+};
+
+export const Sidebar: React.FC<SidebarProps> = ({ active = "Dashboard", setActivePage, doctor }) => {
   // Fallback if doctor or avatar is not provided
   const defaultAvatar = "https://randomuser.me/api/portraits/women/44.jpg";
   const doctorName = doctor?.name || "Doctor Name";
