@@ -76,11 +76,11 @@ function Signup() {
                 <div className="space-y-[18px] xl:space-y-[20px] flex flex-col">
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
                     <span className="text-12 md:text-[14px]">
-                      Email
+                      User Name
                     </span>
                     <Input
-                      type="email"
-                      placeholder="Enter Your Email"
+                      type="username"
+                      placeholder="Enter Your User Name"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setEmail(e.target.value)
                       }
