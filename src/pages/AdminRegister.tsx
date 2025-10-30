@@ -6,14 +6,19 @@ import PageLoader from "@/components/PageLoader";
 
 function Signup() {
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("");
+  const [nic, setNIC] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  
 
   const [usernameError, setUsernameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  // const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+   const [nicError, setNICError] = useState("");
+   const [phoneNumberError, setPhoneNumberError] = useState("");
   const [pwError, setPWError] = useState("");
 
   const [loading, setLoading] = useState(true);
@@ -36,16 +41,20 @@ function Signup() {
 
   // Reset errors
   setUsernameError("");
-  setEmailError("");
+  // setEmailError("");
+  setNICError("");
+  setPhoneNumberError("");
   setPasswordError("");
   setPWError("");
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   // Validations
   if (!username) return setUsernameError("Username is required.");
-  if (!email) return setEmailError("Email is required.");
-  if (!emailRegex.test(email)) return setEmailError("Invalid email format.");
+  // if (!email) return setEmailError("Email is required.");
+  // if (!emailRegex.test(email)) return setEmailError("Invalid email format.");
+  if (!phoneNumber) return setPhoneNumberError("Phone Number is required.");
+  if (!nic) return setNICError("NIC is required.");
   if (!password) return setPasswordError("Password is required.");
   if (password !== confirmPassword) return setPWError("Passwords do not match.");
   if (!role) return alert("Please select a role.");
@@ -79,11 +88,11 @@ function Signup() {
       body: JSON.stringify({
         name: username,
         username,
-        email,
+        // email,
         password,
-        phoneNumber: "0000000000", // optional placeholder
+        phoneNumber, // optional placeholder
         role: prismaRole, // mapped to Prisma enum
-        nic: "000000000V", // optional placeholder
+        nic, // optional placeholder
       }),
     });
 
@@ -106,9 +115,10 @@ function Signup() {
   return (
     <div className="flex flex-col md:flex w-full relative mobile-background">
       {loading && <PageLoader />}
-      <div className="grid lg:grid-cols-2 grid-rows-1 min-h-screen w-full md:px-[16px] lg:px-0">
-        <div className="overflow-hidden px-[15px] sm:px-[100px] md:px-[160px] lg:px-[60px] xl:px-[60px] 2xl:px-[196px] justify-center 2xl:items-center py-[163px] md:py-[126px] lg:py-[40px] xl:py-[40px] 2xl:py-[100px] lg:space-y-[30px] 2xl:space-y-[60px] w-full flex flex-col">
-          <div className="flex flex-col lg:space-y-[30px] 2xl:space-y-[0px]">
+      <div className="grid lg:grid-cols-2 grid-rows-1 w-full md:px-[16px] lg:px-0">
+        <div className="h-full  lg:h-screen px-[15px] sm:px-[100px] md:px-[160px] lg:px-[60px] xl:px-[60px] 2xl:px-[196px] justify-center 2xl:items-center
+         py-[40px] sm:py-[100px] md:py-[126px] lg:py-[40px] xl:py-[40px] 2xl:py-[100px] lg:space-y-[30px] 2xl:space-y-[60px] w-full flex flex-col">
+          <div className="flex flex-col ">
             <div className="font-productsans text-[32px] lg:flex hidden mb-5">
               Welcome to the NICU
             </div>
@@ -117,9 +127,9 @@ function Signup() {
               <span className="text-[36px] md:text-[60px] -mt-3 md:-mt-4 mb-5">NICU</span>
             </div>
 
-            <div className="space-y-[53px] lg:space-y-[15px] 2xl:w-[540px]">
+            <div className="space-y-[53px] lg:space-y-[15px] 2xl:w-[540px] ">
               <form onSubmit={handleSignin}>
-                <div className="space-y-[12px] xl:space-y-[16px]">
+                <div className="space-y-[12px] xl:space-y-[8px]">
                   {/* Username */}
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
                     <span className="text-[12px] md:text-[14px]">Enter Your User name</span>
@@ -128,11 +138,23 @@ function Signup() {
                   </div>
 
                   {/* Email */}
-                  <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
+                  {/* <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
                     <span className="text-[12px] md:text-[14px]">Email</span>
                     <Input type="email" placeholder="Enter Your Email" onChange={(e) => setEmail(e.target.value)} />
                     {emailError && <span className="text-red-500 text-sm">{emailError}</span>}
-                  </div>
+                  </div> */}
+
+                  <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px] ">
+                    <span className="text-[12px] md:text-[14px]">NIC</span>
+                    <Input type="nic" placeholder="Enter Your NIC" onChange={(e) => setNIC(e.target.value)} />
+                    {nicError && <span className="text-red-500 text-sm">{nicError}</span>}
+                  </div> 
+
+                  <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
+                    <span className="text-[12px] md:text-[14px]">Phone Number</span>
+                    <Input type="phoneNumber" placeholder="Enter Your Phone Number" onChange={(e) => setPhoneNumber(e.target.value)} />
+                    {phoneNumberError && <span className="text-red-500 text-sm">{phoneNumberError}</span>}
+                  </div> 
 
                   {/* Password */}
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
@@ -158,7 +180,7 @@ function Signup() {
                   <button
                     className="bg-[#6673FC] h-[32px] lg:h-[50px] font-productsans text-white w-full py-[8px] 2xl:py-[10px] text-[12px] md:text-[16px]"
                     type="submit"
-                    disabled={!email || !password || !confirmPassword || !username}
+                    disabled={!nic || !password || !confirmPassword || !username}
                   >
                     REGISTER
                   </button>
@@ -190,7 +212,7 @@ function Signup() {
         </div>
 
         {/* Right Image */}
-        <div className="w-full hidden lg:flex">
+        <div className="w-full hidden lg:flex ">
           <img src="/images/login/login.jpg" alt="Login Image" className="h-screen w-full" />
         </div>
       </div>

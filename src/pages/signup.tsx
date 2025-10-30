@@ -8,10 +8,11 @@ import { Input } from "@/components/Input";
 import PageLoader from "@/components/PageLoader";
 
 function Signup() { 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
+  // const [emailError, setEmailError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [pwError, setPWError] = useState("");
@@ -28,13 +29,15 @@ function Signup() {
     e.preventDefault();
   
     // Email format validation (allows any domain)
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Wrong Email Format.");
-      return;
-    } else {
-      setEmailError(""); // Clear error if format is correct
-    }
+    // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // if (!emailRegex.test(email)) {
+    //   setEmailError("Wrong Email Format.");
+    //   return;
+    // } else {
+    //   setEmailError("");
+    // }
+   if (!username) return setUsernameError("Username is required.");
+
     if (password !== confirmPassword) {
         setPWError("Passwords do not match.");
         return;
@@ -42,7 +45,7 @@ function Signup() {
         setPWError(""); // Clear error when passwords match
       }
      
-    const data = { email, password }; 
+    const data = { username, password }; 
     console.log(data);
     navigate("/infantdetails");
   };
@@ -82,11 +85,11 @@ function Signup() {
                       type="username"
                       placeholder="Enter Your User Name"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setEmail(e.target.value)
+                        setUsername(e.target.value)
                       }
                     />
-                    {emailError && (
-                      <span className="text-red-500 text-sm">{emailError}</span>
+                    {usernameError && (
+                      <span className="text-red-500 text-sm">{usernameError }</span>
                     )}
                   </div>
                   <div className="flex flex-col w-full space-y-[6px] md:space-y-[3px]">
@@ -124,10 +127,10 @@ function Signup() {
                 
                 <button
                   className={`bg-[#6673FC] h-[32.17px] lg:h-[50px] font-productsans text-white w-full py-[8px] 2xl:py-[10px] text-[12px] md:text-[16px] ${
-                    !email || !password ? "cursor-not-allowed" : ""
+                    !username || !password ? "cursor-not-allowed" : ""
                   }`}
                   type="submit"
-                  disabled={ !email || !password || !confirmPassword} 
+                  disabled={ !username || !password || !confirmPassword} 
                 >
                   SIGN UP
                 </button>

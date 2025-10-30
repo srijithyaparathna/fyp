@@ -1,78 +1,96 @@
-import React, { useState } from 'react'
-import {IconButton,Menu,MenuItem} from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+import React, { useState } from 'react';
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import MyAccount from '@/components/MyAccount'; // your profile info component
 
 const MoreOptionsMenu: React.FC = () => {
-    // State to store the HTML element that anchors the menu
-    // null means the menu is colsed: and element means the opens anchored to that element
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [showProfile, setShowProfile] = useState(false);
 
-  // Boolean to check if the menu is open true or closed false
   const open = Boolean(anchorEl);
 
-// when the iconbutton is clicked store the button element in anchorE1
-    const handleClick = (event:React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event?.currentTarget)
-    }
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-// Close the menu by setting anchorE1 to null 
-const handleClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
-}
+  };
 
- // handle for Profile menu
- const handleProfileClick = () => {
+  const handleProfileClick = () => {
     console.log("Profile click");
     handleClose();
- };
+    setShowProfile(true);
+  };
 
- const handleAcountClick = () => {
+  const handleAcountClick = () => {
     console.log("My account clicked");
     handleClose();
- };
+  };
 
-const handleLogoutClick = () => {
-    console.log('Logout clicked');
+  const handleLogoutClick = () => {
+    console.log("Logout clicked");
     handleClose();
-}
+    // Optionally clear token
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+  };
 
-
-
-
-
-
-
-
+  const handleCloseProfile = () => {
+    setShowProfile(false); // ✅ close profile panel
+  };
 
   return (
-     <>
-      {/* Icon button with "more" (three-dot) icon */}
+    <>
+      {/* Icon button (3-dot menu) */}
       <IconButton color="inherit" onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
 
-      {/* MUI Menu Component */}
+      {/* MUI Menu */}
       <Menu
         id="more-options-menu"
-        anchorEl={anchorEl}   // Anchor position for the menu
-        open={open}           // Boolean to open/close menu
-        onClose={handleClose} // Close menu when clicking outside
-        anchorOrigin={{       // Position of the menu relative to the anchor
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
           vertical: "top",
-          horizontal: "right"
+          horizontal: "right",
         }}
-        transformOrigin={{    // Where the menu grows from
+        transformOrigin={{
           vertical: "top",
-          horizontal: "left"
+          horizontal: "left",
         }}
       >
-        {/* Menu Items with click handlers */}
         <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
         <MenuItem onClick={handleAcountClick}>My account</MenuItem>
         <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
-    </>
-  )
-}
 
-export default MoreOptionsMenu
+      {showProfile && (
+        <div
+          className="fixed top-14 right-6 w-[350px]  bg-white shadow-2xl rounded-2xl
+           border-gray-200  transition-transform duration-300 ease-in-out transform z-50"
+        >
+          {/* Close button */}
+          <button
+            onClick={handleCloseProfile}
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          >
+            ✕
+          </button>
+          <MyAccount />
+        </div>
+      )}
+
+      {showProfile && (
+        <div
+          className="fixed inset-0 bg-black opacity-40 z-40"
+          onClick={handleCloseProfile}
+        ></div>
+      )}
+    </>
+  );
+};
+
+export default MoreOptionsMenu;
