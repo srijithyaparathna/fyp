@@ -56,7 +56,7 @@ const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
       return;
     }
 
-    // ✅ Store token and user in localStorage
+    // token and user in localStorage
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
